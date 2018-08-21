@@ -22,7 +22,7 @@ function varargout = GameScoreCalculator(varargin)
 
 % Edit the above text to modify the response to help GameScoreCalculator
 
-% Last Modified by GUIDE v2.5 21-Aug-2018 11:38:07
+% Last Modified by GUIDE v2.5 21-Aug-2018 15:54:08
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -61,7 +61,26 @@ handles.setting.savePath = 'Database/';
 
 handles.data.PlayerWeights= [1,1,1,1,1,1];
 
+autosaveExist = exist('autoSave.mat','file');
 
+if autosaveExist
+
+resumeExisting = questdlg('Previous Player Database found, load data base?');    
+
+if strcmpi(resumeExisting,'Yes')
+   load('autoSave.mat')
+   handles.uitable1.Data = saveData.table;
+   handles.NarrInput.String = num2str(saveData.playerWeighting(1), '%0.1g');
+   handles.replayInput.String = num2str(saveData.playerWeighting(2), '%0.1g');
+   handles.PlayabilityInput.String = num2str(saveData.playerWeighting(3), '%0.1g');
+   handles.MusicInput.String = num2str(saveData.playerWeighting(4), '%0.1g');
+   handles.GraphicsInput.String = num2str(saveData.playerWeighting(5), '%0.1g');
+   handles.ChallengeInput.String = num2str(saveData.playerWeighting(6), '%0.1g');
+elseif strcmpi(resumeExisting,'Cancel')
+
+end
+    
+end
 
 % Update handles structure
 guidata(hObject, handles);
@@ -336,3 +355,20 @@ function ChallengeInput_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
+
+
+% --- Executes when user attempts to close figure1.
+function figure1_CloseRequestFcn(hObject, eventdata, handles)
+% hObject    handle to figure1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+emptyTest = cellfun(@isempty,handles.uitable1.Data(:,1));
+saveData.table = handles.uitable1.Data;
+saveData.playerWeighting = handles.data.PlayerWeights;
+if any(~emptyTest)
+    save('autoSave.mat','saveData')   
+end
+
+% Hint: delete(hObject) closes the figure
+delete(hObject);
