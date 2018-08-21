@@ -182,18 +182,18 @@ emptyTest = cellfun(@isempty,handles.uitable1.Data(:,1));
 for entry = 1:length(emptyTest)
     if ~emptyTest(entry)
         game.retailcost = handles.uitable1.Data{entry,2};
-        game.HLTB = handles.uitable1.Data{entry,3};
-        game.narrative = handles.uitable1.Data{entry,4};
-        game.replayability = handles.uitable1.Data{entry,5};
-        game.gameplayLoop = handles.uitable1.Data{entry,6};
-        game.music = handles.uitable1.Data{entry,7};
-        game.graphics = handles.uitable1.Data{entry,8};
-        game.challenge = handles.uitable1.Data{entry,9};
-        game.hoursPlayed = handles.uitable1.Data{entry,10};
-        game.cost = handles.uitable1.Data{entry,11};
+        game.HLTB = handles.uitable1.Data(entry,3};
+        game.narrative = handles.uitable1.Data(entry,4};
+        game.replayability = handles.uitable1.Data(entry,5};
+        game.gameplayLoop = handles.uitable1.Data(entry,6};
+        game.music = handles.uitable1.Data(entry,7};
+        game.graphics = handles.uitable1.Data(entry,8);
+        game.challenge = handles.uitable1.Data(entry,9);
+        game.hoursPlayed = handles.uitable1.Data(entry,10);
+        game.cost = handles.uitable1.Data(entry,11);
         
         score = gameFormula(game, handles.data.PlayerWeights);
-        handles.uitable1.Data{entry,12} = score;
+        handles.uitable1.Data(entry,12) = score;
     end
 end
 guidata(hObject, handles);
