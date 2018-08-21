@@ -127,6 +127,7 @@ function NarrInput_Callback(hObject, eventdata, handles)
 %        str2double(get(hObject,'String')) returns contents of NarrInput as a double
 
 
+
 % --- Executes during object creation, after setting all properties.
 function NarrInput_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to NarrInput (see GCBO)
@@ -240,7 +241,7 @@ function ChallengeInput_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'String') returns contents of ChallengeInput as text
 %        str2double(get(hObject,'String')) returns contents of ChallengeInput as a double
-
+mychallengeWeight = str2double(get(hObject,'String'));
 
 % --- Executes during object creation, after setting all properties.
 function ChallengeInput_CreateFcn(hObject, eventdata, handles)
