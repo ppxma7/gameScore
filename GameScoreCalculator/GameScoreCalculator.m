@@ -57,7 +57,9 @@ handles.output = hObject;
 
 addpath(genpath('Supporting Functions'))
 
-handles.setting.savePath = 'Database/';
+bloop = pwd;
+handles.setting.savePath = [bloop, '/Database'];
+%handles.setting.savePath = '/Database/';
 
 handles.data.PlayerWeights= [1,1,1,1,1,1];
 
