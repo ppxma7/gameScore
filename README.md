@@ -1,5 +1,7 @@
 # gameScore
 
+<img src="https://github.com/ppxma7/gameScore/blob/master/gSv3.png" width="250">
+
 ### Set of functions to produce data-driven, personalised metrics on video games.
 
 - Initially, we wanted to find an objective way to rank video games, then find a metric based on adding a bit of subjectivity to this.
