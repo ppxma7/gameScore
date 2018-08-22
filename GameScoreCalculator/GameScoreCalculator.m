@@ -22,7 +22,7 @@ function varargout = GameScoreCalculator(varargin)
 
 % Edit the above text to modify the response to help GameScoreCalculator
 
-% Last Modified by GUIDE v2.5 21-Aug-2018 15:54:08
+% Last Modified by GUIDE v2.5 22-Aug-2018 11:11:12
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -84,7 +84,6 @@ end
 
 % Update handles structure
 guidata(hObject, handles);
-
 % UIWAIT makes GameScoreCalculator wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
 
@@ -405,3 +404,76 @@ end
 
 % Hint: delete(hObject) closes the figure
 delete(hObject);
+
+
+% --- Executes on selection change in popupmenu1.
+function popupmenu1_Callback(hObject, eventdata, handles)
+% hObject    handle to popupmenu1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: contents = cellstr(get(hObject,'String')) returns popupmenu1 contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from popupmenu1
+
+% this is a popup menu to sort the rows by column
+
+fudge = handles.uitable1.Data;
+emptyCells = cellfun('isempty', fudge);
+fudge(all(emptyCells,2), :) = []; % get rid of empty columns (this might break later)
+dataTable = cell2table(fudge); % convert to table to use sortrows
+
+switch get(handles.popupmenu1, 'Value')
+    case 1 %'Retail Cost'
+        sortedTable = sortrows(dataTable, 2, 'descend');
+        sortedData = table2cell(sortedTable); % turn back to cell array
+    case 2 %'Mean Game Duration'
+        sortedTable = sortrows(dataTable, 3, 'descend');
+        sortedData = table2cell(sortedTable);
+    case 3 %'Narrative'
+        sortedTable = sortrows(dataTable, 4, 'descend');
+        sortedData = table2cell(sortedTable);
+    case 4 %'Replaybility'
+        sortedTable = sortrows(dataTable, 5, 'descend');
+        sortedData = table2cell(sortedTable);
+    case 5 %'Gameplay'
+        sortedTable = sortrows(dataTable, 6, 'descend');
+        sortedData = table2cell(sortedTable);
+    case 6 %'Music'
+        sortedTable = sortrows(dataTable, 7, 'descend');
+        sortedData = table2cell(sortedTable);
+    case 7 %'Graphics'
+        sortedTable = sortrows(dataTable, 8, 'descend');
+        sortedData = table2cell(sortedTable);
+    case 8 %'Challenge'
+        sortedTable = sortrows(dataTable, 9, 'descend');
+        sortedData = table2cell(sortedTable);
+    case 9 %'Hours Played'
+        sortedTable = sortrows(dataTable, 10, 'descend');
+        sortedData = table2cell(sortedTable);
+    case 10 %'Price Paid'
+        sortedTable = sortrows(dataTable, 11, 'descend');
+        sortedData = table2cell(sortedTable);
+    case 11 %'Score'
+        sortedTable = sortrows(dataTable, 12, 'descend');
+        sortedData = table2cell(sortedTable);
+           
+end
+
+% populate new table with sortedData
+handles.uitable1.Data = sortedData; % update data
+guidata(hObject, handles);
+
+
+
+
+% --- Executes during object creation, after setting all properties.
+function popupmenu1_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to popupmenu1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: popupmenu controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
