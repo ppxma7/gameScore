@@ -57,7 +57,9 @@ handles.output = hObject;
 
 addpath(genpath('Supporting Functions'))
 
-handles.setting.savePath = 'Database/';
+bloop = pwd;
+handles.setting.savePath = [bloop, '/Database'];
+%handles.setting.savePath = '/Database/';
 
 handles.data.PlayerWeights= [1,1,1,1,1,1];
 
@@ -148,7 +150,7 @@ game.Challenge = user_val(8);
 
 filename = [gameName,'.mat'];
 
-exTest = exist([savePath,filename],'file')
+exTest = exist([savePath,filename],'file');
 
 response = 'Yes';
 if exTest
@@ -176,7 +178,7 @@ end
 
 handles.uitable1.Data{ind,1} = gameName;
 for ii = 1:numlines
-handles.uitable1.Data{ind,ii+1} = user_val(ii)
+handles.uitable1.Data{ind,ii+1} = user_val(ii);
 end
 guidata(hObject, handles);
 
