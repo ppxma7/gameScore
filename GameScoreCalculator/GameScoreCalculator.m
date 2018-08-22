@@ -55,11 +55,9 @@ function GameScoreCalculator_OpeningFcn(hObject, eventdata, handles, varargin)
 % Choose default command line output for GameScoreCalculator
 handles.output = hObject;
 
-addpath(genpath('Supporting Functions'))
-
-bloop = pwd;
-handles.setting.savePath = [bloop, '/Database'];
-%handles.setting.savePath = '/Database/';
+addpath(genpath('Supporting Functions'));
+addpath(genpath('Database'));
+handles.setting.savePath = 'Database/';
 
 handles.data.PlayerWeights= [1,1,1,1,1,1];
 
@@ -137,6 +135,11 @@ gameName = answer{1,1};
 %% Save input data to txt file
 
 savePath = handles.setting.savePath;
+% this is a temp fix 
+if ~strcmpi(handles.setting.savePath, 'Database/')
+    handles.setting.savePath = 'Database/';
+end
+
 
 game.Name = gameName;
 game.RetailCost = user_val(1);
