@@ -106,6 +106,34 @@ function LoadEntryButton_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+%cd(handles.setting.savePath)
+[loadedGame, path] = uigetfile;
+load(loadedGame);
+
+% find free rows
+emptyTestL = cellfun(@isempty,handles.uitable1.Data(:,1));
+if all(~emptyTestL)
+    idx = size(handles.uitable1.Data,1) +1;
+else
+    idx = min(find(double(emptyTestL)));
+end
+
+% populate row with loaded game
+handles.uitable1.Data{idx,1} = game.Name;
+
+% is there a better way to do this than getfield?
+handles.uitable1.Data{idx, 1} = getfield(game, 'Name');
+handles.uitable1.Data{idx, 2} = getfield(game, 'RetailCost');
+handles.uitable1.Data{idx, 3} = getfield(game, 'MeanGameDuration');
+handles.uitable1.Data{idx, 4} = getfield(game, 'Narrative');
+handles.uitable1.Data{idx, 5} = getfield(game, 'Replayability');
+handles.uitable1.Data{idx, 6} = getfield(game, 'Gameplay');
+handles.uitable1.Data{idx, 7} = getfield(game, 'Music');
+handles.uitable1.Data{idx, 8} = getfield(game, 'Graphics');
+handles.uitable1.Data{idx, 9} = getfield(game, 'Challenge');
+
+
+guidata(hObject, handles);
 
 
 
