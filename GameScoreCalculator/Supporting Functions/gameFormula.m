@@ -76,7 +76,8 @@ gamefromStruct = [game.narrative; game.replayability; game.gameplayLoop; game.mu
 gamefromPerformance = [game.narrativeP; game.replayabilityP; game.gameplayLoopP; game.musicP; game.graphicsP; game.challengeP];
 
 % here, the performance values weight the structure of the game
-structTimesPerformance = gamefromStruct .* gamefromPerformance;
+% structTimesPerformance = gamefromStruct .* gamefromPerformance; % original linear weightings
+ structTimesPerformance = gamefromPerformance.^2 ./ gamefromStruct; % JS fractional performance * performance
 
 gameWeights = myweights' .* structTimesPerformance;
 meanWeight = mean(gameWeights);
