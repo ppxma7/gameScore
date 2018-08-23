@@ -73,8 +73,12 @@ function [weightCorrected] = gameFormula(game, myweights)
 %prompt = 'Now give me your weights for the last 6 parameters as a vector: ';
 
 gamefromStruct = [game.narrative; game.replayability; game.gameplayLoop; game.music; game.graphics; game.challenge];
+gamefromPerformance = [game.narrativeP; game.replayabilityP; game.gameplayLoopP; game.musicP; game.graphicsP; game.challengeP];
 
-gameWeights = myweights' .* gamefromStruct;
+% here, the performance values weight the structure of the game
+structTimesPerformance = gamefromStruct .* gamefromPerformance;
+
+gameWeights = myweights' .* structTimesPerformance;
 meanWeight = mean(gameWeights);
 
 % could just take the mean of the gameWeights?
